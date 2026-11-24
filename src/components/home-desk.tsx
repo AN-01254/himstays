@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { PropertyCard } from "@/components/property-card";
@@ -10,6 +11,11 @@ import { allRooms, properties } from "@/lib/catalog";
 import { nightStatus } from "@/lib/availability";
 import { heroPhoto, lodgePhoto } from "@/lib/photos";
 import { useLedger } from "@/lib/use-ledger";
+
+const ValleyMap = dynamic(() => import("@/components/valley-map").then((mod) => mod.ValleyMap), {
+  ssr: false,
+  loading: () => <div className="h-[520px] animate-pulse rounded-[28px] bg-[#e6e1d4] sm:h-[640px]" />,
+});
 
 const featured = properties[0]?.rooms[0];
 const featuredHouse = properties[0];
@@ -83,6 +89,20 @@ export function HomeDesk() {
         <p className="px-2 pt-3 text-[12px] tracking-[-0.2px] text-[#9a9a9a]">
           Homestay near Shimla, public domain, Shivya. Other houses: CC BY-SA, Wikimedia Commons.
         </p>
+      </section>
+
+      <section className="bg-white px-3 pt-16 pb-6 sm:px-4 sm:pt-24">
+        <div className="mx-auto max-w-[760px] text-center">
+          <h2 className="font-heading text-[clamp(40px,6vw,72px)] leading-[0.96] tracking-[-0.04em]">
+            Where the houses are
+          </h2>
+          <p className="mx-auto mt-5 max-w-md text-[18px] leading-[1.4] tracking-[-0.2px] text-graphite">
+            Six lodges, from Old Manali and the Parvati to Shimla, Bir, and Kaza.
+          </p>
+        </div>
+        <div className="mx-auto mt-10 w-full max-w-[1100px]">
+          <ValleyMap />
+        </div>
       </section>
 
       <section className="mx-auto grid w-full max-w-[1280px] items-start gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-16 lg:py-28">
