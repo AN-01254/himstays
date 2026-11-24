@@ -1,18 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
-const outfit = Outfit({
+const regola = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
-});
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: "400",
+  variable: "--font-regola",
 });
 
 export const metadata: Metadata = {
@@ -26,15 +22,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${outfit.variable} ${fraunces.variable} h-full antialiased`}>
-      <body className="flex min-h-full w-full max-w-[100vw] flex-col overflow-x-clip">
+    <html lang="en" className={`${regola.variable} h-full antialiased`}>
+      <body className="flex min-h-full w-full max-w-[100vw] flex-col overflow-x-clip bg-parchment text-ink">
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-[#faf7f2] focus:px-3 focus:py-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-xl focus:bg-parchment focus:px-3 focus:py-2"
         >
           Skip to content
         </a>
-        <Suspense fallback={<div className="h-16 border-b border-[#e0d4c2]" />}>
+        <Suspense fallback={<div className="h-16 border-b border-black/10 bg-parchment" />}>
           <SiteHeader />
         </Suspense>
         <main id="content" className="flex-1">

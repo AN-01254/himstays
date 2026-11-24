@@ -15,7 +15,15 @@ const links = [
   { href: "/host", label: "Occupancy" },
 ];
 
-function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+function NavLinks({
+  pathname,
+  onDark,
+  onNavigate,
+}: {
+  pathname: string;
+  onDark: boolean;
+  onNavigate?: () => void;
+}) {
   return (
     <>
       {links.map((link) => {
@@ -26,8 +34,9 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
             href={link.href}
             onClick={onNavigate}
             className={cn(
-              "text-sm text-[#3f382f]",
-              active && "text-[#1e3a32] underline decoration-[#c9843a] decoration-2 underline-offset-8",
+              "text-[15px] tracking-[-0.2px]",
+              onDark ? "text-white/80" : "text-ink",
+              active && "text-sky-blue",
             )}
             aria-current={active ? "page" : undefined}
           >
@@ -42,29 +51,42 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const onDark = pathname === "/";
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[#e0d4c2]/80 bg-[#f3eee4]/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <header
+      className={cn(
+        "sticky top-0 z-30 border-b backdrop-blur-md",
+        onDark ? "border-white/10 bg-black/90 text-white" : "border-black/10 bg-parchment/95 text-ink",
+      )}
+    >
+      <div className="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between gap-3 px-5 sm:px-8">
         <Wordmark />
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Primary">
-          <NavLinks pathname={pathname} />
-          <YourStays />
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
+          <NavLinks pathname={pathname} onDark={onDark} />
+          <YourStays onDark={onDark} />
         </nav>
         <div className="flex items-center gap-2 md:hidden">
-          <YourStays />
-          <Button type="button" variant="outline" size="icon" aria-label="Open menu" onClick={() => setOpen(true)}>
+          <YourStays onDark={onDark} />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            aria-label="Open menu"
+            className={onDark ? "text-white hover:bg-white/10" : undefined}
+            onClick={() => setOpen(true)}
+          >
             <Menu />
           </Button>
         </div>
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="left" className="bg-[#faf7f2]">
+        <SheetContent side="left" className="bg-parchment text-ink">
           <SheetHeader>
-            <SheetTitle className="font-heading text-xl">HimStays</SheetTitle>
+            <SheetTitle className="font-heading text-[30px] tracking-[-0.9px]">HimStays</SheetTitle>
           </SheetHeader>
-          <nav className="flex flex-col gap-4 px-4" aria-label="Mobile">
-            <NavLinks pathname={pathname} onNavigate={() => setOpen(false)} />
+          <nav className="flex flex-col gap-5 px-4 text-[18px]" aria-label="Mobile">
+            <NavLinks pathname={pathname} onDark={false} onNavigate={() => setOpen(false)} />
           </nav>
         </SheetContent>
       </Sheet>

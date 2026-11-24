@@ -36,10 +36,10 @@ export function StaysBrowser() {
   }, [valley, sort, today, bookings, blocks, ready]);
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
-      <p className="text-[11px] tracking-[0.18em] text-[#8c4a2f] uppercase">Himachal</p>
-      <h1 className="font-heading mt-2 text-4xl text-[#1c1914] sm:text-5xl">Stays with a key on the desk</h1>
-      <p className="mt-3 max-w-2xl text-base leading-7 text-[#3f382f]">
+    <div className="mx-auto w-full max-w-[1280px] px-5 py-16 sm:px-8 sm:py-24">
+      <p className="text-[14px] tracking-[-0.56px] text-graphite">Himachal</p>
+      <h1 className="font-heading mt-4 text-[clamp(40px,5vw,60px)] leading-[0.96] tracking-[-0.04em] text-ink">Stays with a key on the desk</h1>
+      <p className="mt-5 max-w-2xl text-[18px] leading-[1.33] tracking-[-0.18px]">
         Twelve rooms across six valleys. Open a house to turn the model, then take the nights the board still
         shows as hollow.
       </p>
@@ -91,7 +91,7 @@ export function StaysBrowser() {
       </div>
 
       {visible.length === 0 ? (
-        <p className="mt-10 text-sm text-[#5c5348]">No lodge in that valley is on the desk.</p>
+        <p className="mt-16 text-[16px] text-graphite">No lodge in that valley is on the desk.</p>
       ) : (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((property) => (

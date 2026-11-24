@@ -35,33 +35,33 @@ export function PropertyCard({
   return (
     <Link
       href={`/stays/${property.slug}#${property.rooms[0]?.slug ?? ""}`}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#e0d4c2] bg-[#faf7f2]"
+      className="group flex h-full flex-col overflow-hidden rounded-xl bg-[#f7f7f0] shadow-card"
     >
       <ValleyPoster view={property.rooms[0]?.view ?? "valley"} className="h-40 w-full sm:h-44" />
-      <div className="flex flex-1 flex-col gap-3 p-4">
+      <div className="flex flex-1 flex-col gap-4 p-5">
         <div>
-          <p className="text-[11px] tracking-[0.16em] text-[#8c4a2f] uppercase">
+          <p className="text-[12px] tracking-[-0.48px] text-graphite">
             {property.valley} · {elevationLabel(property.elevationM)}
           </p>
-          <h3 className="font-heading mt-1 text-2xl text-[#1c1914] group-hover:text-[#1e3a32]">{property.name}</h3>
-          <p className="text-sm text-[#5c5348]">{property.town}</p>
+          <h3 className="font-heading mt-2 text-[30px] leading-[1.14] tracking-[-0.9px] text-ink">{property.name}</h3>
+          <p className="text-[14px] text-graphite">{property.town}</p>
         </div>
-        <p className="text-sm leading-6 text-[#3f382f]">{property.summary}</p>
+        <p className="text-[16px] leading-[1.49] tracking-[-0.22px]">{property.summary}</p>
         <div className="mt-auto">
-          <div className="mb-2 h-1.5 overflow-hidden rounded-full bg-[#e7dccb]">
-            <div className="h-full rounded-full bg-[#1e3a32]" style={{ width: `${takenShare}%` }} />
+          <div className="mb-2 h-1 overflow-hidden rounded-full bg-ash">
+            <div className="h-full rounded-full bg-sky-blue" style={{ width: `${takenShare}%` }} />
           </div>
-          <p className="text-xs text-[#5c5348]">
+          <p className="text-[12px] tracking-[-0.48px] text-graphite">
             {today
               ? `${week.open} of ${week.total} room-nights open this week`
               : "Checking the week…"}
           </p>
-          <div className="mt-3 flex items-end justify-between gap-3">
-            <p className="text-sm">
-              From <span className="font-medium">{inr(from)}</span>
-              <span className="text-[#5c5348]"> / night</span>
+          <div className="mt-4 flex items-end justify-between gap-3">
+            <p className="text-[15px]">
+              From {inr(from)}
+              <span className="text-graphite"> / night</span>
             </p>
-            <p className="text-xs text-[#5c5348]">
+            <p className="text-[12px] text-graphite">
               {next ? `Next open ${formatDay(next)}` : today ? "Full this fortnight" : "Host " + property.host}
             </p>
           </div>

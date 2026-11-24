@@ -6,15 +6,15 @@ import type { NightStatus } from "@/lib/types";
 
 export function NightLegend() {
   return (
-    <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#5c5348]">
+    <ul className="flex flex-wrap gap-x-4 gap-y-2 text-[12px] tracking-[-0.48px] text-graphite">
       <li className="flex items-center gap-2">
-        <span className="size-3 rounded-full border border-[#8c4a2f]" /> Open
+        <span className="size-3 rounded-full border border-[#999]" /> Open
       </li>
       <li className="flex items-center gap-2">
-        <span className="size-3 rounded-full bg-[#1c1914]" /> Guest stay
+        <span className="size-3 rounded-full bg-ink" /> Guest stay
       </li>
       <li className="flex items-center gap-2">
-        <span className="size-3 rounded-full bg-[#c9843a]" /> Your stay
+        <span className="size-3 rounded-full bg-sky-blue" /> Your stay
       </li>
       <li className="flex items-center gap-2">
         <span className="night-blocked size-3 rounded-full" /> House hold
@@ -24,11 +24,11 @@ export function NightLegend() {
 }
 
 function markClass(status: NightStatus, inRange: boolean): string {
-  if (inRange && status === "open") return "border-[#1e3a32] bg-[#1e3a32]";
-  if (status === "sample") return "border-[#1c1914] bg-[#1c1914]";
-  if (status === "yours") return "border-[#c9843a] bg-[#c9843a]";
-  if (status === "blocked") return "night-blocked border-[#8c4a2f]";
-  return "border-[#8c4a2f] bg-transparent";
+  if (inRange && status === "open") return "border-sky-blue bg-sky-blue";
+  if (status === "sample") return "border-ink bg-ink";
+  if (status === "yours") return "border-sky-blue bg-sky-blue";
+  if (status === "blocked") return "night-blocked border-[#999]";
+  return "border-[#999] bg-transparent";
 }
 
 export function NightTrail({
@@ -64,13 +64,13 @@ export function NightTrail({
             onBlur={() => onHover?.(null)}
             onClick={() => onPick?.(day.iso)}
             className={cn(
-              "flex shrink-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[#1c1914] transition-colors",
+              "flex shrink-0 flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-ink transition-colors",
               dense ? "w-9" : "w-12",
-              inRange ? "bg-[#1e3a32]/10" : "hover:bg-[#efe6d6]",
+              inRange ? "bg-sky-blue/10" : "hover:bg-black/4",
               !onPick && "cursor-default",
             )}
           >
-            <span className="text-[10px] tracking-wide text-[#5c5348] uppercase">{formatWeekday(day.iso)}</span>
+            <span className="text-[10px] tracking-[-0.3px] text-graphite uppercase">{formatWeekday(day.iso)}</span>
             <span className={cn("font-medium", dense ? "text-[11px]" : "text-xs")}>{formatDayNumber(day.iso)}</span>
             <span className={cn("w-2.5 rounded-full border", dense ? "h-6" : "h-8", markClass(day.status, inRange))} />
           </button>

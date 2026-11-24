@@ -10,7 +10,7 @@ const RoomCanvas = dynamic(
   () => import("@/components/room-canvas").then((mod) => mod.RoomCanvas),
   {
     ssr: false,
-    loading: () => <div className="h-full w-full animate-pulse bg-[#e7dccb]" />,
+    loading: () => <div className="h-full w-full animate-pulse bg-driftwood" />,
   },
 );
 
@@ -24,7 +24,7 @@ class ModelBoundary extends Component<{ children: ReactNode }, { failed: boolean
   render() {
     if (this.state.failed) {
       return (
-        <div className="flex h-full items-end bg-[#e7d3bc] p-5 text-sm text-[#1c1914]">
+        <div className="flex h-full items-end bg-warm-sand p-5 text-sm text-ink">
           This browser could not draw the room model. The nights on the desk still book.
         </div>
       );
@@ -73,7 +73,7 @@ export function RoomStage({
   notes,
   framed = true,
 }: RoomStageProps) {
-  const [hour, setHour] = useState<DayHour>(2);
+  const [hour, setHour] = useState<DayHour>(1);
   const [turning, setTurning] = useState(false);
   const [focus, setFocus] = useState<RoomFocus>(null);
   const [resetKey, setResetKey] = useState(0);
@@ -84,15 +84,15 @@ export function RoomStage({
     focus === "window" ? notes?.window : focus === "bed" ? notes?.bed : focus === "stove" ? notes?.stove : null;
 
   return (
-    <section className={framed ? "min-w-0 overflow-hidden rounded-3xl border border-[#e0d4c2] bg-[#faf7f2]" : "min-w-0"}>
-      <div className="flex items-start justify-between gap-3 px-4 py-3 sm:px-5">
+    <section className={framed ? "min-w-0 overflow-hidden rounded-[18px] bg-warm-sand shadow-subtle" : "min-w-0"}>
+      <div className="flex items-start justify-between gap-3 px-5 py-5 sm:px-6">
         <div>
-          <p className="text-[11px] tracking-[0.18em] text-[#8c4a2f] uppercase">Room model</p>
-          <h2 className="font-heading text-2xl text-[#1c1914]">{name}</h2>
+          <p className="text-[12px] tracking-[-0.48px] text-graphite">Room model</p>
+          <h2 className="font-heading text-[30px] leading-[1.14] tracking-[-0.9px] text-ink">{name}</h2>
         </div>
-        <p className="max-w-[12rem] text-right text-sm text-[#5c5348]">{moodLabel}</p>
+        <p className="max-w-[12rem] text-right text-[14px] leading-[1.4] text-graphite">{moodLabel}</p>
       </div>
-      <div className="relative h-[340px] bg-[#d7c3a8] sm:h-[460px] lg:h-[520px]">
+      <div className="relative mx-5 mb-2 h-[340px] overflow-hidden rounded-xl bg-[#eef3f6] sm:mx-6 sm:h-[460px] lg:h-[520px]">
         <ModelBoundary>
           <RoomCanvas
             key={`${name}-${resetKey}`}
@@ -106,11 +106,11 @@ export function RoomStage({
             focus={focus}
           />
         </ModelBoundary>
-        <p className="pointer-events-none absolute bottom-3 left-3 rounded-full bg-[#faf7f2]/90 px-3 py-1 text-xs text-[#5c5348]">
+        <p className="pointer-events-none absolute bottom-3 left-3 rounded-3xl bg-parchment/92 px-3 py-1 text-[12px] tracking-[-0.48px] text-graphite">
           Drag to turn the model
         </p>
       </div>
-      <div className="flex flex-col gap-3 px-4 py-3 sm:px-5">
+      <div className="flex flex-col gap-3 px-5 py-5 sm:px-6">
         <div className="flex flex-wrap items-center gap-2">
           {hours.map((item) => (
             <Button
@@ -161,7 +161,7 @@ export function RoomStage({
             ))}
           </div>
         ) : null}
-        {activeNote ? <p className="text-sm leading-6 text-[#3f382f]">{activeNote}</p> : null}
+        {activeNote ? <p className="text-[16px] leading-[1.49] tracking-[-0.22px]">{activeNote}</p> : null}
       </div>
     </section>
   );

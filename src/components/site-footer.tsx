@@ -3,23 +3,23 @@ import { Wordmark } from "@/components/wordmark";
 
 export function SiteFooter() {
   return (
-    <footer className="mt-auto border-t border-[#e0d4c2]">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-end md:justify-between">
+    <footer className="mt-auto border-t border-black/10 bg-parchment text-ink">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-10 px-5 py-24 sm:px-8 md:flex-row md:items-end md:justify-between">
         <div className="max-w-md">
           <Wordmark compact />
-          <p className="mt-3 text-sm leading-6 text-[#5c5348]">
+          <p className="mt-4 text-[16px] leading-[1.49] tracking-[-0.22px] text-graphite">
             A booking desk for independent lodges in Himachal Pradesh. The room is a model you can turn.
             The ledger of your stays stays on this browser.
           </p>
         </div>
-        <div className="flex flex-col gap-2 text-sm">
-          <Link href="/stays" className="text-[#1e3a32] underline-offset-4 hover:underline">
+        <div className="flex flex-col gap-3 text-[16px] tracking-[-0.22px]">
+          <Link href="/stays" className="text-sky-blue">
             All stays
           </Link>
-          <Link href="/host" className="text-[#1e3a32] underline-offset-4 hover:underline">
+          <Link href="/host" className="text-sky-blue">
             Occupancy desk
           </Link>
-          <p className="text-[#5c5348]">Manali · Shimla · McLeod Ganj · Kasol · Kaza · Bir</p>
+          <p className="text-graphite">Manali · Shimla · McLeod Ganj · Kasol · Kaza · Bir</p>
         </div>
       </div>
     </footer>

@@ -102,18 +102,18 @@ export function BookingPanel({
   }
 
   return (
-    <section id="booking" className="min-w-0 rounded-3xl border border-[#e0d4c2] bg-[#faf7f2] p-4 sm:p-5">
-      <p className="text-[11px] tracking-[0.16em] text-[#8c4a2f] uppercase">Take the night</p>
-      <h2 className="font-heading mt-1 text-3xl text-[#1c1914]">{room.name}</h2>
-      <p className="mt-1 text-sm text-[#5c5348]">
+    <section id="booking" className="min-w-0 rounded-[18px] bg-warm-sand p-6 shadow-subtle sm:p-9">
+      <p className="text-[12px] tracking-[-0.48px] text-graphite">Take the night</p>
+      <h2 className="font-heading mt-2 text-[36px] leading-[1.1] tracking-[-0.5px] text-ink">{room.name}</h2>
+      <p className="mt-2 text-[14px] leading-[1.5] tracking-[-0.56px] text-graphite">
         {bedLabel(room.bed)}. Sleeps {room.capacity}. {room.sizeSqm} m². {inr(room.price)} on weeknights
       </p>
-      <p className="mt-3 text-sm leading-6 text-[#3f382f]">{room.summary}</p>
+      <p className="mt-4 text-[16px] leading-[1.49] tracking-[-0.22px]">{room.summary}</p>
 
       <div className="mt-5">
         <div className="mb-2 flex items-baseline justify-between gap-3">
-          <h3 className="text-sm font-medium">The next {GUEST_HORIZON} nights</h3>
-          <p className="text-xs text-[#5c5348]">Friday and Saturday are 12% more</p>
+          <h3 className="text-[15px]">The next {GUEST_HORIZON} nights</h3>
+          <p className="text-[12px] tracking-[-0.48px] text-graphite">Friday and Saturday are 12% more</p>
         </div>
         {ready ? (
           <NightTrail
@@ -124,18 +124,18 @@ export function BookingPanel({
             onHover={onHover}
           />
         ) : (
-          <div className="h-16 animate-pulse rounded-2xl bg-[#e7dccb]" />
+          <div className="h-16 animate-pulse rounded-xl bg-driftwood" />
         )}
         <div className="mt-3">
           <NightLegend />
         </div>
-        <p className="mt-3 text-sm text-[#3f382f]">
+        <p className="mt-3 text-[15px] leading-[1.45] tracking-[-0.2px]">
           {checkIn && checkOut
             ? `Arrive ${formatLong(checkIn)}. Leave the morning of ${formatLong(checkOut)}. ${nights} ${nights === 1 ? "night" : "nights"}.`
             : "Tap an open night, then tap the last night you want to sleep. The hollow marks are free."}
         </p>
         {notice ? (
-          <p className="mt-2 text-sm text-[#8c4a2f]" role="status">
+          <p className="mt-2 text-[15px] text-evergreen" role="status">
             {notice}
           </p>
         ) : null}
@@ -161,12 +161,11 @@ export function BookingPanel({
               autoComplete="name"
               maxLength={80}
               placeholder="The name for the key"
-              className="h-10 bg-[#f3eee4]"
             />
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="guests">Guests</Label>
-            <div className="flex h-10 items-center gap-2">
+            <div className="flex h-[52px] items-center gap-2">
               <Button
                 type="button"
                 variant="outline"
@@ -201,7 +200,6 @@ export function BookingPanel({
             inputMode="tel"
             maxLength={18}
             placeholder="Optional"
-            className="h-10 bg-[#f3eee4]"
           />
         </div>
         <div className="grid gap-1.5">
@@ -212,12 +210,11 @@ export function BookingPanel({
             onChange={(event) => setNote(event.target.value)}
             maxLength={280}
             placeholder="A late jeep, a child, a quiet room."
-            className="bg-[#f3eee4]"
           />
         </div>
 
         {priced && nights > 0 ? (
-          <div className="rounded-2xl bg-[#f3eee4] px-3 py-3 text-sm">
+          <div className="rounded-xl bg-parchment px-4 py-4 text-[15px] shadow-subtle">
             {[...groups.entries()].map(([amount, count]) => (
               <p key={amount} className="flex justify-between gap-3">
                 <span>
@@ -227,40 +224,40 @@ export function BookingPanel({
                 <span>{inr(amount * count)}</span>
               </p>
             ))}
-            <p className="mt-2 flex justify-between gap-3 border-t border-[#e0d4c2] pt-2 font-medium">
+            <p className="mt-2 flex justify-between gap-3 border-t border-black/10 pt-2">
               <span>To the house</span>
               <span>{inr(priced.total)}</span>
             </p>
-            <p className="mt-1 text-xs text-[#5c5348]">Linen included. Anything else is settled on arrival.</p>
+            <p className="mt-1 text-[12px] tracking-[-0.48px] text-graphite">Linen included. Anything else is settled on arrival.</p>
           </div>
         ) : null}
 
         {conflictCount > 0 ? (
-          <p className="text-sm text-[#8f3d2c]" role="alert">
+          <p className="text-[15px] text-signal-orange" role="alert">
             {conflictCount === 1
               ? "One night in this stay is already spoken for. Shorten it, or try the other room."
               : `${conflictCount} nights in this stay are already spoken for. Shorten it, or try the other room.`}
           </p>
         ) : null}
         {error ? (
-          <p className="text-sm text-[#8f3d2c]" role="alert">
+          <p className="text-[15px] text-signal-orange" role="alert">
             {error}
           </p>
         ) : null}
 
-        <Button type="button" className="h-11" disabled={!ready} onClick={submit}>
+        <Button type="button" className="h-auto rounded-xl px-[14px] py-[14px]" disabled={!ready} onClick={submit}>
           {nights > 0 ? `Hold ${nights} ${nights === 1 ? "night" : "nights"}` : "Hold these nights"}
         </Button>
-        <p className="text-xs leading-5 text-[#5c5348]">
+        <p className="text-[12px] leading-[1.5] tracking-[-0.48px] text-graphite">
           The confirmation stays on this browser, and the occupancy desk on this device moves with it. Sample
           guests already on the board are part of the lodge, not people you can message.
         </p>
       </form>
 
       <Dialog open={pending !== null} onOpenChange={(open) => !open && setPending(null)}>
-        <DialogContent className="bg-[#faf7f2] sm:max-w-md">
+        <DialogContent className="bg-parchment shadow-card sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="font-heading text-2xl">The room is in your name</DialogTitle>
+            <DialogTitle className="font-heading text-[30px] tracking-[-0.9px]">The room is in your name</DialogTitle>
             <DialogDescription>
               {pending
                 ? `${pending.guestName} · ${room.name} at ${property.name}`
@@ -269,7 +266,7 @@ export function BookingPanel({
           </DialogHeader>
           {pending ? (
             <div className="grid gap-2 text-sm">
-              <p className="font-heading text-3xl tracking-[0.18em] text-[#1e3a32]">{pending.id}</p>
+              <p className="font-heading text-[36px] leading-none tracking-[-0.5px] text-sky-blue">{pending.id}</p>
               <p>
                 {formatLong(pending.checkIn)} to the morning of {formatLong(pending.checkOut)}
               </p>
@@ -277,7 +274,7 @@ export function BookingPanel({
                 {pending.guests} {pending.guests === 1 ? "guest" : "guests"} · {eachNight(pending.checkIn, pending.checkOut).length} nights ·{" "}
                 {inr(quote(room.price, pending.checkIn, pending.checkOut).total)}
               </p>
-              <p className="text-[#5c5348]">
+              <p className="text-graphite">
                 Show this reference to {property.host}. It lives in Your stays on this browser.
               </p>
             </div>

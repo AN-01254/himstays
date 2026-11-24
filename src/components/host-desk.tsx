@@ -117,22 +117,22 @@ export function HostDesk() {
   }
 
   return (
-    <div className="mx-auto w-full min-w-0 max-w-6xl px-4 py-10 sm:px-6">
-      <p className="text-[11px] tracking-[0.18em] text-[#8c4a2f] uppercase">Lodge desk</p>
-      <div className="mt-2 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div className="mx-auto w-full min-w-0 max-w-[1280px] px-5 py-16 sm:px-8 sm:py-24">
+      <p className="text-[14px] tracking-[-0.56px] text-graphite">Lodge desk</p>
+      <div className="mt-4 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="font-heading text-4xl text-[#1c1914] sm:text-5xl">Occupancy</h1>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-[#3f382f]">
+          <h1 className="font-heading text-[clamp(40px,5vw,60px)] leading-[0.96] tracking-[-0.04em] text-ink">Occupancy</h1>
+          <p className="mt-5 max-w-2xl text-[18px] leading-[1.33] tracking-[-0.18px]">
             Every room HimStays holds a key for, night by night. A filled mark is spoken for. Tap an open
             night to hold it for the house. Tap that hold to put the key back.
           </p>
         </div>
         <label className="grid gap-1.5 text-sm">
-          <span className="text-[#5c5348]">Hold new nights as</span>
+          <span className="text-[14px] tracking-[-0.56px] text-graphite">Hold new nights as</span>
           <select
             value={reason}
             onChange={(event) => setReason(event.target.value as (typeof reasons)[number])}
-            className="h-10 rounded-lg border border-[#e0d4c2] bg-[#faf7f2] px-3"
+            className="h-[52px] rounded-xl border border-black/10 bg-black/[0.03] px-[15px] text-[15px]"
           >
             {reasons.map((item) => (
               <option key={item} value={item}>
@@ -167,13 +167,13 @@ export function HostDesk() {
       </div>
 
       {message ? (
-        <p className="mt-4 text-sm text-[#1e3a32]" role="status">
+        <p className="mt-6 text-[15px] text-evergreen" role="status">
           {message}
         </p>
       ) : null}
 
       <div className="mt-8">
-        <h2 className="font-heading text-2xl">Keys tonight</h2>
+        <h2 className="font-heading text-[36px] leading-[1.1] tracking-[-0.5px]">Keys tonight</h2>
         <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {rooms.map(({ property, room }) => {
             const status = ready && today ? nightStatus(property.slug, room.slug, today, today, bookings, blocks) : null;
@@ -207,19 +207,19 @@ export function HostDesk() {
                     ? `With ${yours?.guestName ?? "you"}`
                     : `With ${stay?.guestName ?? "a guest"}`;
             return (
-              <li key={`${property.slug}-${room.slug}`} className="rounded-2xl border border-[#e0d4c2] bg-[#faf7f2] p-4">
+              <li key={`${property.slug}-${room.slug}`} className="rounded-xl bg-[#f7f7f0] p-5 shadow-card">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs text-[#5c5348]">{property.town}</p>
-                    <h3 className="font-medium">{room.name}</h3>
-                    <p className="text-sm text-[#5c5348]">{property.name}</p>
+                    <p className="text-[12px] tracking-[-0.48px] text-graphite">{property.town}</p>
+                    <h3 className="mt-1 font-heading text-[23px] tracking-[-0.46px]">{room.name}</h3>
+                    <p className="text-[14px] text-graphite">{property.name}</p>
                   </div>
-                  <span className={out ? "mt-1 size-3 rounded-full bg-[#1c1914]" : "mt-1 size-3 rounded-full bg-[#3e5c4c]"} />
+                  <span className={out ? "mt-1 size-3 rounded-full bg-ink" : "mt-1 size-3 rounded-full bg-sky-blue"} />
                 </div>
-                <p className="mt-3 text-sm">{line}</p>
+                <p className="mt-4 text-[15px]">{line}</p>
                 <Link
                   href={`/stays/${property.slug}#${room.slug}`}
-                  className="mt-2 inline-block text-sm text-[#1e3a32] underline underline-offset-4"
+                  className="mt-3 inline-block text-[15px] text-sky-blue"
                 >
                   Open the model
                 </Link>
@@ -231,7 +231,7 @@ export function HostDesk() {
 
       <div className="mt-10">
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <h2 className="font-heading text-2xl">The next {HOST_HORIZON} nights</h2>
+          <h2 className="font-heading text-[36px] leading-[1.1] tracking-[-0.5px]">The next {HOST_HORIZON} nights</h2>
           <NightLegend />
         </div>
         <div className="grid gap-5">
@@ -246,15 +246,15 @@ export function HostDesk() {
                 )
               : null;
             return (
-              <section key={property.slug} className="rounded-3xl border border-[#e0d4c2] bg-[#faf7f2] p-4 sm:p-5">
+              <section key={property.slug} className="rounded-[18px] bg-warm-sand p-6 shadow-subtle sm:p-9">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <div>
-                    <h3 className="font-heading text-2xl">{property.name}</h3>
-                    <p className="text-sm text-[#5c5348]">
+                    <h3 className="font-heading text-[30px] leading-[1.14] tracking-[-0.9px]">{property.name}</h3>
+                    <p className="text-[14px] text-graphite">
                       {property.host} · {property.town}
                     </p>
                   </div>
-                  <p className="text-sm text-[#3f382f]">
+                  <p className="text-[15px]">
                     {week && week.total > 0
                       ? `${Math.round((week.taken / week.total) * 100)}% spoken for this week`
                       : "Counting the week"}
@@ -275,8 +275,8 @@ export function HostDesk() {
                     return (
                       <div key={room.slug}>
                         <div className="mb-1 flex items-baseline justify-between gap-3">
-                          <p className="text-sm font-medium">{room.name}</p>
-                          <p className="text-xs text-[#5c5348]">
+                          <p className="text-[15px]">{room.name}</p>
+                          <p className="text-[12px] tracking-[-0.48px] text-graphite">
                             {days[0] ? `Tonight · ${statusLabel(days[0].status)}` : "Tonight"}
                           </p>
                         </div>
@@ -290,7 +290,7 @@ export function HostDesk() {
                             }}
                           />
                         ) : (
-                          <div className="h-14 animate-pulse rounded-2xl bg-[#e7dccb]" />
+                          <div className="h-14 animate-pulse rounded-xl bg-driftwood" />
                         )}
                       </div>
                     );
@@ -309,19 +309,19 @@ export function HostDesk() {
 
       {bookings.length > 0 ? (
         <section className="mt-10">
-          <h2 className="font-heading text-2xl">Stays from this browser</h2>
+          <h2 className="font-heading text-[36px] leading-[1.1] tracking-[-0.5px]">Stays from this browser</h2>
           <ul className="mt-3 grid gap-3">
             {bookings.map((booking) => {
               const found = getRoom(booking.propertySlug, booking.roomSlug);
               return (
-                <li key={booking.id} className="flex flex-col gap-2 rounded-2xl border border-[#e0d4c2] px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+                <li key={booking.id} className="flex flex-col gap-3 rounded-xl bg-[#f7f7f0] px-5 py-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="font-heading tracking-[0.12em]">{booking.id}</p>
+                    <p className="font-heading text-[23px] tracking-[-0.46px] text-sky-blue">{booking.id}</p>
                     <p className="text-sm">
                       {booking.guestName}
                       {booking.phone ? ` · ${booking.phone}` : ""} · {found ? `${found.property.name}, ${found.room.name}` : booking.roomSlug}
                     </p>
-                    <p className="text-sm text-[#5c5348]">
+                    <p className="text-[14px] text-graphite">
                       {formatLong(booking.checkIn)} – {formatLong(booking.checkOut)}
                       {booking.note ? ` · ${booking.note}` : ""}
                     </p>
@@ -341,10 +341,10 @@ export function HostDesk() {
 
 function Stat({ label, value, detail }: { label: string; value: string; detail: string }) {
   return (
-    <div className="rounded-2xl border border-[#e0d4c2] bg-[#1e3a32] px-4 py-4 text-[#f6f1e7]">
-      <p className="text-xs tracking-[0.14em] uppercase text-[#e7c49a]">{label}</p>
-      <p className="font-heading mt-2 text-4xl">{value}</p>
-      <p className="mt-1 text-sm text-[#f6f1e7]/80">{detail}</p>
+    <div className="rounded-[18px] bg-warm-sand px-6 py-8 text-ink shadow-subtle">
+      <p className="text-[12px] tracking-[-0.48px] text-graphite">{label}</p>
+      <p className="font-heading mt-3 text-[48px] leading-none tracking-[-1.3px]">{value}</p>
+      <p className="mt-3 text-[14px] leading-[1.5] tracking-[-0.56px] text-graphite">{detail}</p>
     </div>
   );
 }
@@ -360,14 +360,14 @@ function Movement({
 }) {
   return (
     <section>
-      <h2 className="font-heading text-2xl">{title}</h2>
-      {rows.length === 0 ? <p className="mt-3 text-sm text-[#5c5348]">{empty}</p> : null}
-      <ul className="mt-3 grid gap-2">
+      <h2 className="font-heading text-[36px] leading-[1.1] tracking-[-0.5px]">{title}</h2>
+      {rows.length === 0 ? <p className="mt-4 text-[15px] text-graphite">{empty}</p> : null}
+      <ul className="mt-4 grid gap-3">
         {rows.map((row) => (
-          <li key={row.id} className="rounded-2xl border border-[#e0d4c2] bg-[#faf7f2] px-3 py-3 text-sm">
-            <p className="text-xs tracking-wide text-[#8c4a2f] uppercase">{formatLong(row.when)} · {row.kind}</p>
-            <p className="mt-1 font-medium">{row.who}</p>
-            <p className="text-[#5c5348]">{row.where}</p>
+          <li key={row.id} className="rounded-xl bg-[#f7f7f0] px-4 py-4 text-[15px] shadow-card">
+            <p className="text-[12px] tracking-[-0.48px] text-graphite">{formatLong(row.when)} · {row.kind}</p>
+            <p className="mt-1">{row.who}</p>
+            <p className="text-graphite">{row.where}</p>
           </li>
         ))}
       </ul>

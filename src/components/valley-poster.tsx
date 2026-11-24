@@ -1,45 +1,33 @@
 import type { WindowView } from "@/lib/types";
 
-const sky: Record<WindowView, string> = {
-  valley: "#d5e3ea",
-  ridge: "#c9d5df",
-  monastery: "#ead9c0",
-  river: "#d5e7e4",
-  desert: "#f0d7b4",
-  meadow: "#d7e6d4",
-};
-
-const far: Record<WindowView, string> = {
-  valley: "#8ea4ae",
-  ridge: "#9aabba",
-  monastery: "#b9a48a",
-  river: "#8fafa8",
-  desert: "#c49a6a",
-  meadow: "#8eaa86",
-};
-
-const near: Record<WindowView, string> = {
-  valley: "#1e3a32",
-  ridge: "#24343f",
-  monastery: "#6b4a32",
-  river: "#1d4a52",
-  desert: "#8c4a2f",
-  meadow: "#2f4a34",
+const hill: Record<WindowView, string> = {
+  valley: "#375033",
+  ridge: "#2c3a44",
+  monastery: "#375033",
+  river: "#2a4a52",
+  desert: "#c4a574",
+  meadow: "#375033",
 };
 
 export function ValleyPoster({ view, className }: { view: WindowView; className?: string }) {
   return (
-    <svg viewBox="0 0 640 400" className={className} role="img" aria-label="A drawn ridge for this lodge">
-      <rect width="640" height="400" fill={sky[view]} />
-      <circle cx="520" cy="78" r="28" fill="#f6efe2" opacity="0.9" />
-      <path d="M0 250 L90 150 L170 220 L260 110 L360 210 L470 130 L560 200 L640 150 L640 400 L0 400 Z" fill={far[view]} />
-      <path d="M0 300 L120 210 L210 270 L320 180 L430 280 L520 220 L640 270 L640 400 L0 400 Z" fill={near[view]} />
-      <path d="M250 250 L290 190 L330 250 Z" fill="#f3eee4" />
-      <rect x="286" y="228" width="28" height="34" fill="#1c1914" />
+    <svg viewBox="0 0 640 360" className={className} role="img" aria-label="A drawn elevation of this lodge">
+      <rect width="640" height="360" fill="#f7f7f0" />
+      <rect x="0" y="0" width="640" height="210" fill="#f3f7fb" />
+      <circle cx="500" cy="72" r="22" fill="#fff" />
+      <path d="M0 210 L120 132 L210 188 L310 96 L420 176 L520 118 L640 168 L640 210 Z" fill="#d9e3ea" />
+      <path d="M0 250 L150 176 L250 230 L360 150 L470 228 L560 186 L640 230 L640 360 L0 360 Z" fill={hill[view]} />
+      <g fill="none" stroke="#000" strokeWidth="1.4">
+        <path d="M248 248 L320 176 L392 248" />
+        <path d="M248 248 H392 V312 H248 Z" />
+        <path d="M300 312 V268 H332 V312" />
+      </g>
+      <rect x="268" y="208" width="22" height="18" fill="#0096f7" />
+      <rect x="350" y="208" width="22" height="18" fill="#0096f7" />
       {view === "river" || view === "valley" ? (
-        <path d="M40 330 C140 300 200 350 300 320 C400 290 480 350 620 318" fill="none" stroke="#d5e7e8" strokeWidth="8" />
+        <path d="M24 300 C160 274 220 324 340 296 C450 270 520 328 620 300" fill="none" stroke="#0096f7" strokeWidth="3" />
       ) : null}
-      {view === "desert" ? <rect x="70" y="250" width="70" height="28" fill="#e6c89a" /> : null}
+      {view === "monastery" ? <path d="M470 168 L486 140 L502 168 Z" fill="none" stroke="#000" strokeWidth="1.4" /> : null}
     </svg>
   );
 }

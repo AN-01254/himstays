@@ -24,7 +24,7 @@ export async function generateMetadata({
 
 export default function Page({ params }: { params: Promise<{ slug: string }> }) {
   return (
-    <Suspense fallback={<div className="mx-auto h-80 w-full max-w-6xl animate-pulse px-4 py-10" />}>
+    <Suspense fallback={<div className="mx-auto h-80 w-full max-w-[1280px] animate-pulse bg-warm-sand/60 px-5 py-16" />}>
       <StayRoute params={params} />
     </Suspense>
   );
