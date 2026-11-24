@@ -112,7 +112,9 @@ export function SiteFooter() {
           <div className="order-1 lg:order-none">
             <p className="text-[12px] leading-[1.55] tracking-[-0.2px] text-[#9a9a9a]">
               HimStays is a model of a booking desk for fictional lodges in Himachal. Sample guests are not
-              real people. Stays and house holds live in this browser and are not sent to a server.
+              real people. Stays and house holds live in this browser and are not sent to a server. The
+              snowed house is a homestay near Shimla, public domain, Shivya. The other photographs are CC
+              BY-SA via Wikimedia Commons.
             </p>
             <div className="mt-8 flex gap-6 text-[14px] tracking-[-0.2px]">
               <Link href="/privacy">Privacy policy</Link>

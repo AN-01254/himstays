@@ -1,22 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { PropertyCard } from "@/components/property-card";
 import { RoomStage } from "@/components/room-stage";
 import { Button } from "@/components/ui/button";
 import { allRooms, properties } from "@/lib/catalog";
 import { nightStatus } from "@/lib/availability";
+import { heroPhoto, lodgePhoto } from "@/lib/photos";
 import { useLedger } from "@/lib/use-ledger";
 
 const featured = properties[0]?.rooms[0];
 const featuredHouse = properties[0];
-
-const cta = "h-auto rounded-xl px-[18px] py-[14px] text-[15px]";
+const dock = properties.slice(0, 4);
 
 export function HomeDesk() {
   const { today, bookings, blocks, ready } = useLedger();
   const [takenPreview, setTakenPreview] = useState(false);
+  const [dockIndex, setDockIndex] = useState(1);
   const rooms = allRooms();
   const tonight = ready
     ? rooms.filter(
@@ -27,30 +29,60 @@ export function HomeDesk() {
 
   return (
     <div>
-      <section className="bg-black text-white">
-        <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8 px-5 py-24 sm:px-8 lg:py-32">
-          <p className="text-[14px] tracking-[-0.56px] text-white/70">Kullu · Shimla · Kangra · Spiti</p>
-          <h1 className="max-w-5xl font-heading text-[clamp(48px,8vw,96px)] leading-[0.9] tracking-[-0.047em]">
-            See the room, then take the night.
-          </h1>
-          <p className="max-w-xl text-[18px] leading-[1.33] tracking-[-0.18px] text-white/80">
-            HimStays is the booking desk for a handful of independent lodges in Himachal. Turn a model of
-            the room — the bed, the bukhari, the window — and hold only the nights that are still open.
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button variant="urgent" className={cta} nativeButton={false} render={<Link href="/stays" />}>
-              Browse the lodges
-            </Button>
-            <Button
-              variant="ghost"
-              className={`${cta} text-white hover:bg-white/10`}
-              nativeButton={false}
-              render={<Link href="/host" />}
-            >
-              Open occupancy
-            </Button>
-          </div>
+      <section className="bg-white px-3 pt-3 sm:px-4 sm:pt-4">
+        <h1 className="sr-only">HimStays. Rooms in Himachal you can turn before you book.</h1>
+        <div className="relative h-[78vh] min-h-[640px] overflow-hidden rounded-[28px] bg-[#d7e2ea]">
+          <Image
+            src={heroPhoto.src}
+            alt={heroPhoto.alt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[62%_center]"
+          />
+          {dock.length > 0 ? (
+            <div className="absolute inset-x-0 bottom-5 flex justify-center px-3 sm:bottom-7">
+              <div className="flex max-w-full items-center">
+                {dock.map((property, index) => {
+                  const photo = lodgePhoto[property.slug] ?? heroPhoto;
+                  if (index === dockIndex) {
+                    return (
+                      <Link
+                        key={property.slug}
+                        href={`/stays/${property.slug}`}
+                        className="mx-1.5 flex min-w-0 items-center gap-3 rounded-full bg-white py-1.5 pr-4 pl-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.16)] sm:mx-2 sm:pr-5"
+                      >
+                        <Image src={photo.src} alt="" width={56} height={56} className="size-12 rounded-full object-cover sm:size-14" />
+                        <span className="min-w-0">
+                          <span className="block truncate text-[14px] tracking-[-0.2px] text-ink sm:text-[15px]">
+                            {property.name}
+                            <span className="text-graphite"> {property.town}</span>
+                          </span>
+                          <span className="block text-[14px] text-sky-blue">See the room</span>
+                        </span>
+                      </Link>
+                    );
+                  }
+                  return (
+                    <button
+                      key={property.slug}
+                      type="button"
+                      aria-label={property.name}
+                      aria-pressed={false}
+                      onClick={() => setDockIndex(index)}
+                      className="mx-1 size-12 shrink-0 overflow-hidden rounded-full ring-2 ring-white sm:mx-1.5 sm:size-14"
+                    >
+                      <Image src={photo.src} alt="" width={56} height={56} className="h-full w-full object-cover" />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
         </div>
+        <p className="px-2 pt-3 text-[12px] tracking-[-0.2px] text-[#9a9a9a]">
+          Homestay near Shimla, public domain, Shivya. Other houses: CC BY-SA, Wikimedia Commons.
+        </p>
       </section>
 
       <section className="mx-auto grid w-full max-w-[1280px] items-start gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-16 lg:py-28">

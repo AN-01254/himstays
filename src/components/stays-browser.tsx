@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { PropertyCard } from "@/components/property-card";
 import { Button } from "@/components/ui/button";
 import { properties, valleys } from "@/lib/catalog";
@@ -12,7 +13,10 @@ type SortKey = "open" | "price" | "elevation";
 
 export function StaysBrowser() {
   const { today, bookings, blocks, ready } = useLedger();
-  const [valley, setValley] = useState<Valley | "All">("All");
+  const requested = useSearchParams().get("valley");
+  const fromUrl = valleys.includes(requested as Valley) ? (requested as Valley) : "All";
+  const [picked, setPicked] = useState<Valley | "All" | null>(null);
+  const valley = picked ?? fromUrl;
   const [sort, setSort] = useState<SortKey>("open");
 
   const visible = useMemo(() => {
@@ -51,7 +55,7 @@ export function StaysBrowser() {
             size="sm"
             variant={valley === "All" ? "default" : "outline"}
             aria-pressed={valley === "All"}
-            onClick={() => setValley("All")}
+            onClick={() => setPicked("All")}
           >
             All valleys
           </Button>
@@ -62,7 +66,7 @@ export function StaysBrowser() {
               size="sm"
               variant={valley === item ? "default" : "outline"}
               aria-pressed={valley === item}
-              onClick={() => setValley(item)}
+              onClick={() => setPicked(item)}
             >
               {item}
             </Button>

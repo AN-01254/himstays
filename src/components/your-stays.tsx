@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { getRoom } from "@/lib/catalog";
 import { formatLong } from "@/lib/dates";
 import { useLedger } from "@/lib/use-ledger";
@@ -15,7 +16,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-export function YourStays({ onDark = false }: { onDark?: boolean }) {
+export function YourStays({ appearance = "pill" }: { appearance?: "pill" | "link" }) {
   const { bookings, ready, cancel, today } = useLedger();
   const [open, setOpen] = useState(false);
   const upcoming = bookings.filter((booking) => !today || booking.checkOut > today);
@@ -25,17 +26,14 @@ export function YourStays({ onDark = false }: { onDark?: boolean }) {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         render={
-          <Button
-            variant="ghost"
-            size="sm"
-            className={
-              onDark
-                ? "h-9 rounded-3xl bg-white/10 px-4 text-white hover:bg-white/20"
-                : "h-9 rounded-3xl bg-black/4 px-4 text-ink hover:bg-black/8"
-            }
-          />
+          appearance === "link" ? (
+            <button type="button" className="flex items-center gap-3 text-[16px] tracking-[-0.2px] text-sky-blue" />
+          ) : (
+            <Button variant="ghost" size="sm" className="h-9 rounded-3xl bg-black/4 px-4 text-ink hover:bg-black/8" />
+          )
         }
       >
+        {appearance === "link" ? <ArrowRight className="size-4" /> : null}
         Your stays{ready && count > 0 ? ` (${count})` : ""}
       </SheetTrigger>
       <SheetContent className="w-full bg-parchment sm:max-w-md">
