@@ -37,8 +37,8 @@ export function SiteFooter() {
             <Link href="/host" className={linkClass}>
               Occupancy
             </Link>
-            <Link href="/#content" className={linkClass}>
-              The model
+            <Link href="/stays/deodar-house" className={linkClass}>
+              The room
             </Link>
           </nav>
           <nav aria-label="Houses">
@@ -113,7 +113,8 @@ export function SiteFooter() {
             <p className="text-[12px] leading-[1.55] tracking-[-0.2px] text-[#9a9a9a]">
               HimStays is a model of a booking desk for fictional lodges in Himachal. Sample guests are not
               real people. Stays and house holds live in this browser and are not sent to a server. The
-              snowed house is a homestay near Shimla, public domain, Shivya. The other photographs are CC
+              snowed house is a homestay near Shimla, public domain, Shivya. Bir cottage rooms are CC BY 4.0,
+              Panchkaranvarun. The timber bedroom is CC BY-SA 4.0, Microrao. The other photographs are CC
               BY-SA via Wikimedia Commons.
             </p>
             <div className="mt-8 flex gap-6 text-[14px] tracking-[-0.2px]">
